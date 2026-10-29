@@ -1,0 +1,120 @@
+{
+  "summary": {
+    "samples": 13,
+    "spearman_rho": 0.935,
+    "mean_abs_error_points": 8.5,
+    "band_exact": "7/13",
+    "band_within_one": "13/13",
+    "duplicate_pairs_caught": "2/2",
+    "duplicate_false_positive_pairs": 0,
+    "secrets_caught": "1/1",
+    "secret_false_positives": 0,
+    "routed_to_human": "12/13"
+  },
+  "rows": [
+    {
+      "sample": "s01_strong_leads",
+      "label": 90,
+      "tool": 98.8,
+      "label_band": "Strong",
+      "tool_band": "Strong",
+      "routed": true
+    },
+    {
+      "sample": "s02_strong_sentiment",
+      "label": 88,
+      "tool": 94.7,
+      "label_band": "Strong",
+      "tool_band": "Strong",
+      "routed": true
+    },
+    {
+      "sample": "s03_good_code_no_reports",
+      "label": 65,
+      "tool": 70.6,
+      "label_band": "Solid",
+      "tool_band": "Solid",
+      "routed": false
+    },
+    {
+      "sample": "s04_medium_wordfreq",
+      "label": 50,
+      "tool": 56.8,
+      "label_band": "Developing",
+      "tool_band": "Developing",
+      "routed": true
+    },
+    {
+      "sample": "s05_medium_regression",
+      "label": 45,
+      "tool": 40.1,
+      "label_band": "Developing",
+      "tool_band": "Developing",
+      "routed": true
+    },
+    {
+      "sample": "s06_weak_inventory",
+      "label": 25,
+      "tool": 40.3,
+      "label_band": "Needs work",
+      "tool_band": "Developing",
+      "routed": true
+    },
+    {
+      "sample": "s07_readme_only",
+      "label": 20,
+      "tool": 31.2,
+      "label_band": "Needs work",
+      "tool_band": "Needs work",
+      "routed": true
+    },
+    {
+      "sample": "s08_code_only",
+      "label": 40,
+      "tool": 33.9,
+      "label_band": "Developing",
+      "tool_band": "Needs work",
+      "routed": true
+    },
+    {
+      "sample": "s09_empty",
+      "label": 5,
+      "tool": 8.9,
+      "label_band": "Needs work",
+      "tool_band": "Needs work",
+      "routed": true
+    },
+    {
+      "sample": "s10_copy_of_s01_renamed",
+      "label": 90,
+      "tool": 79.6,
+      "label_band": "Strong",
+      "tool_band": "Solid",
+      "routed": true
+    },
+    {
+      "sample": "s11_committed_secret",
+      "label": 60,
+      "tool": 49.4,
+      "label_band": "Solid",
+      "tool_band": "Developing",
+      "routed": true
+    },
+    {
+      "sample": "s12_padded_readme",
+      "label": 25,
+      "tool": 42.2,
+      "label_band": "Needs work",
+      "tool_band": "Developing",
+      "routed": true
+    },
+    {
+      "sample": "s13_copy_of_s02_verbatim",
+      "label": 60,
+      "tool": 57.3,
+      "label_band": "Solid",
+      "tool_band": "Developing",
+      "routed": true
+    }
+  ]
+}
