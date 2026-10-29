@@ -96,6 +96,8 @@ If the LLM step grew into judging, I would add a fixed output schema, a held-out
   3. The renamed copy had a structure similarity of 1.0 but a raw similarity of 0.48 and slipped under a rule that required both views to be high. Unrelated pairs never exceeded 0.18 on structure. I made the structure view enough on its own. A shared starter template would push unrelated submissions up, so this threshold needs real data.
   4. Most routing reasons were "criteria disagree", triggered by zeros for missing deliverables. Only docs, code and tests can now contradict each other.
 
+  The commit history was reorganised into logical steps after development, so the commit order does not match the order in which I found these issues.
+
 ## 7. Safety and privacy
 
 - Submitted code is never run or imported. Notebook `!` and `%` lines are neutralised before parsing.
@@ -111,6 +113,11 @@ If the LLM step grew into judging, I would add a fixed output schema, a held-out
 - Docstring and function-length checks are proxies for quality, not quality itself.
 - Keyword checks for deliverables can be gamed by stuffing words in a README.
 - Thresholds and weights are set by hand and unvalidated on real data.
+- Sub-check thresholds (README length, docstring share, test count, function length and the rest) are hard-coded in `scoring.py`, not in the rubric file.
+- The routing margin is broad: 4 points either side of three cutoffs covers a 24-point slice of the scale.
+- When a submission has no `.git` folder, a `_commits.txt` file is trusted as its history, so a student could fake one.
+- `git log` runs on a `.git` folder that came from the student's zip. It does not run their code, but it is git working on an untrusted repository.
+- Overlap flags include the other submission's folder name, which reaches the reviewer and, if the LLM step is on, the LLM.
 
 ## 9. Execution plan
 
