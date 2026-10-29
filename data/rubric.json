@@ -1,0 +1,54 @@
+{
+  "name": "Cynbit AI/ML Intern task rubric (example configuration)",
+  "criteria": {
+    "documentation": {"weight": 20, "label": "Documentation"},
+    "code_quality": {"weight": 25, "label": "Code quality"},
+    "testing": {"weight": 15, "label": "Testing"},
+    "structure": {"weight": 15, "label": "Structure and reproducibility"},
+    "git_hygiene": {"weight": 10, "label": "Git history"},
+    "task_fit": {"weight": 15, "label": "Task fit (required deliverables)"}
+  },
+  "bands": [[80, "Strong"], [60, "Solid"], [40, "Developing"], [0, "Needs work"]],
+  "borderline_margin": 4,
+  "conflict_gap": 0.8,
+  "long_function_lines": 40,
+  "similarity": {
+    "min_tokens": 60,
+    "struct": 0.80,
+    "raw": 0.50,
+    "raw_only": 0.85,
+    "readme": 0.80
+  },
+  "required_items": {
+    "opportunity_report": {
+      "label": "AI opportunity report",
+      "where": "headings_or_filenames",
+      "patterns": ["opportunity", "industry analysis"]
+    },
+    "technical_approach": {
+      "label": "Technical approach (models, architecture)",
+      "where": "headings_or_filenames",
+      "patterns": ["technical approach", "architecture", "model choice", "approach"]
+    },
+    "proof_of_concept": {
+      "label": "Runnable proof of concept",
+      "where": "structure",
+      "patterns": []
+    },
+    "data_pipeline": {
+      "label": "Data pipeline described",
+      "where": "text",
+      "patterns": ["pipeline", "data flow", "preprocess", "ingest"]
+    },
+    "execution_plan": {
+      "label": "Execution plan or roadmap",
+      "where": "text",
+      "patterns": ["execution plan", "roadmap", "timeline", "next steps", "milestone"]
+    },
+    "evaluation": {
+      "label": "Evaluation of the prototype",
+      "where": "text",
+      "patterns": ["evaluation", "metrics", "accuracy", "test cases", "benchmark"]
+    }
+  }
+}
