@@ -29,7 +29,7 @@ folder / zip / GitHub URL
    cli.py / app.py     command line and Streamlit review queue
 ```
 
-`data/rubric.json` holds the weights, band cutoffs, routing thresholds and the list of required deliverables, so Cynbit can change the rubric without touching code.
+`data/rubric.json` holds the weights, band cutoffs, routing thresholds and the list of required deliverables, so Cynbit can change these without touching code. The individual checks inside each criterion, and their thresholds, are still set in `scoring.py`.
 
 ## 3. Data pipeline
 
@@ -43,7 +43,7 @@ folder / zip / GitHub URL
 3. **Score.** Each criterion is a list of weighted checks. Every check records either a "good" or a "gap" sentence, which is the evidence shown to the reviewer.
 4. **Compare.** Python is tokenised twice: as written, and with names, strings and numbers masked. TF-IDF over token n-grams and cosine similarity give a raw and a structural score against every other submission.
 5. **Route.** A submission goes to a person if it has a high-severity flag, sits within 4 points of a band cutoff, shows docs, code and tests that strongly disagree, or has almost no content.
-6. **Write feedback.** Strengths and improvements come straight from the evidence, ordered by weight times shortfall.
+6. **Write feedback.** Strengths and improvements come straight from the evidence. Strengths are ordered by criterion score, improvements by weight times shortfall.
 
 ## 4. Method choices and alternatives
 
@@ -59,11 +59,11 @@ folder / zip / GitHub URL
 
 The optional step (`feedback.polish_with_llm`) rewords the template feedback into one friendly paragraph.
 
-- **Input.** Only the structured findings: band, score, strengths, improvements and flag text. No source code, README text or student name is sent.
+- **Input.** Only the structured findings: band, score, strengths, improvements and flag text. No source code or README text is sent, and neither is the submission's own name. Overlap flags do name the other submission's folder, which could be a student's name.
 - **System prompt.** Use only the given findings, invent nothing, no scores of its own, at most 140 words, say once that this is a draft for the human reviewer.
 - **Settings.** Low temperature (0.2), short output cap.
 - **Failure behaviour.** No API key, a missing package or any error returns `None`, and the template feedback is used.
-- **Testing.** A unit test passes a fake client and checks that the payload contains no code and that the system prompt carries the constraints. I have not run it against a live model in this build, so wording quality is untested.
+- **Testing.** A unit test passes a fake client and checks that a function definition from the sample is not in the payload and that the system prompt contains the "Do not invent" instruction. I have not run it against a live model in this build, so wording quality is untested.
 
 If the LLM step grew into judging, I would add a fixed output schema, a held-out set of human-graded examples, and a check that every claim in the output maps to a given finding.
 
@@ -83,17 +83,17 @@ If the LLM step grew into judging, I would add a fixed output schema, a held-out
 | Committed secret caught | 1 of 1, no false alarms |
 | Routed to a human | 12 of 13 |
 
-**Where it disagrees with the labels.** The weak inventory script scored 40.3 against my 25, the padded README 42.2 against 25, and the code-only submission 33.9 against 40. The two copies and the secret sample scored lower than my labels because my labels judged intent and ignored that those samples lack reports and tests; I did not change the labels afterwards, so these gaps stay in the table.
+**Where it disagrees with the labels.** The weak inventory script scored 40.3 against my 25, the padded README 42.2 against 25, and the code-only submission 33.9 against 40. The two copies and the secret sample scored lower than my labels because my labels judged intent and ignored what those samples lack: all three are missing the reports, the verbatim copy and the secret sample have no tests, and the renamed copy has tests but a thinner README and git history; I did not change the labels afterwards, so these gaps stay in the table.
 
 **Honest caveats.**
 
 - The samples are synthetic and I wrote both the samples and the labels. This checks the tool against my intent, not against independent reviewers. It cannot show how the tool behaves on real student work.
 - 13 samples is far too few for any reliable statistic.
-- The set is built from edge cases, so the 12 of 13 routing rate says nothing about a real cohort. With a 4-point margin around four band cutoffs, roughly a third of a real cohort could be routed on borderline grounds alone. That margin is the lever that sets the review queue's size.
+- The set is built from edge cases, so the 12 of 13 routing rate says nothing about a real cohort. With a 4-point margin around three band cutoffs, roughly a third of a real cohort could be routed on borderline grounds alone. That margin is the lever that sets the review queue's size.
 - I changed the tool after seeing results, so the final numbers are not an independent test. The changes were:
   1. The first run of the eval was polluted by `__pycache__` folders that pytest had created inside the samples, which the structure check counted as committed junk. I fixed the check so a folder the project's own `.gitignore` excludes is not penalised, and re-ran.
   2. The padded README scored too high because a heading earned credit even with nothing under it. Sections now count only with real content. It still scored 42.2 against a label of 25, so the defence is only partial.
-  3. The renamed copy had a structure similarity of 1.0 but a raw similarity of 0.48 and slipped under a rule that required both views to be high. Unrelated pairs never exceeded 0.17 on structure. I made the structure view enough on its own. A shared starter template would push unrelated submissions up, so this threshold needs real data.
+  3. The renamed copy had a structure similarity of 1.0 but a raw similarity of 0.48 and slipped under a rule that required both views to be high. Unrelated pairs never exceeded 0.18 on structure. I made the structure view enough on its own. A shared starter template would push unrelated submissions up, so this threshold needs real data.
   4. Most routing reasons were "criteria disagree", triggered by zeros for missing deliverables. Only docs, code and tests can now contradict each other.
 
 ## 7. Safety and privacy
@@ -106,7 +106,7 @@ If the LLM step grew into judging, I would add a fixed output schema, a held-out
 
 ## 8. Known limitations
 
-- Code metrics understand Python and notebooks only. JavaScript, TypeScript and other languages score zero on code quality, which would be unfair until fixed.
+- Code metrics understand Python and notebooks only. JavaScript, TypeScript and other languages score zero on code quality and also miss the entrypoint, multi-module, proof-of-concept and overlap checks, which would be unfair until fixed.
 - No check that the code runs or the tests pass.
 - Docstring and function-length checks are proxies for quality, not quality itself.
 - Keyword checks for deliverables can be gamed by stuffing words in a README.

@@ -42,7 +42,7 @@ Scores are 1 to 5, my own judgement, higher is better. "Data" means how much usa
 **Why this one.**
 
 1. The pain is concrete. Every cohort produces a batch of repositories that someone has to open, run, read and grade. Much of that first look is mechanical: is there a README, do the tests exist, does the history show real work, is anything copied.
-2. It is a real demonstration of Cynbit's own offer. Cynbit sells automation that "does the repetitive part and leaves judgement to people", and this applies that idea inside Cynbit.
+2. It is a real demonstration of Cynbit's own offer. Cynbit sells automation that does the repetitive part and leaves judgement to people, and this applies that idea inside Cynbit.
 3. It can be measured honestly. Reviewers already grade submissions, so agreement between tool and reviewer is a number that can be tracked, and the tool's mistakes can be listed.
 4. It is safe to deploy in stages. The tool never decides alone: it shows evidence for every score and sends unclear cases to a person.
 
@@ -75,4 +75,4 @@ Cynbit's actual review process, cohort sizes, reviewer time, grading rubric and 
 - Cynbit Technologies on GitHub (organisation profile): https://github.com/Cynbit-Technologies/.github
 - Cynbit Technologies on Crunchbase: https://www.crunchbase.com/organization/cynbit-technologies
 - Cynbit website, home, story and contact pages: https://www.cynbit.in/ , https://www.cynbit.in/story , https://www.cynbit.in/contact
-- Cynbit and BitElevate 2.0 activity on LinkedIn: https://www.linkedin.com/in/mohak-saini-588991167/
+- LinkedIn post about Cynbit and BitElevate 2.0 by a Cynbit team member: https://www.linkedin.com/in/mohak-saini-588991167/
