@@ -883,7 +883,7 @@ def build() -> None:
 
     write(OUT / "s11_committed_secret", {
         "README.md": FETCHER_README, "fetcher.py": FETCHER, "requirements.txt": "requests\n",
-        ".env": "API_KEY=sk-FAKEFAKEFAKEFAKEFAKE1234\n", ".gitignore": GITIGNORE,
+        ".env": "API_KEY=sk-FAKEFAKEFAKEFAKEFAKE1234\n", ".gitignore": "__pycache__/\n*.pyc\n",
     }, ["add fetcher", "add watchlist function", "add readme", "add env file"])
 
     write(OUT / "s12_padded_readme", {
