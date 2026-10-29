@@ -41,7 +41,7 @@ folder / zip / GitHub URL
    - Git: commit subjects from `git log`, or a `_commits.txt` fixture for the samples.
    - Secrets: three regular expressions for key-like strings.
 3. **Score.** Each criterion is a list of weighted checks. Every check records either a "good" or a "gap" sentence, which is the evidence shown to the reviewer.
-4. **Compare.** Python is tokenised twice: as written, and with names, strings and numbers masked. TF-IDF over token n-grams and cosine similarity give a raw and a structural score against every other submission.
+4. **Compare.** Python is tokenised twice: as written, and with names, strings and numbers masked. TF-IDF over token n-grams and cosine similarity give a raw and a structural score against every other submission. README wording is also compared, using word trigrams, but only among READMEs of 40 or more words.
 5. **Route.** A submission goes to a person if it has a high-severity flag, sits within 4 points of a band cutoff, shows docs, code and tests that strongly disagree, or has almost no content.
 6. **Write feedback.** Strengths and improvements come straight from the evidence. Strengths are ordered by criterion score, improvements by weight times shortfall.
 
