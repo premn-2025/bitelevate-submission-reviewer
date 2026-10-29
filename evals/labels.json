@@ -1,0 +1,23 @@
+{
+  "_note": "Reviewer scores written by the author while designing the samples, before the first eval run. The samples are synthetic and the author is also the labeller, so this checks the tool against intent, not against independent human judgement.",
+  "scores": {
+    "s01_strong_leads": 90,
+    "s02_strong_sentiment": 88,
+    "s03_good_code_no_reports": 65,
+    "s04_medium_wordfreq": 50,
+    "s05_medium_regression": 45,
+    "s06_weak_inventory": 25,
+    "s07_readme_only": 20,
+    "s08_code_only": 40,
+    "s09_empty": 5,
+    "s10_copy_of_s01_renamed": 90,
+    "s11_committed_secret": 60,
+    "s12_padded_readme": 25,
+    "s13_copy_of_s02_verbatim": 60
+  },
+  "duplicate_pairs": [
+    ["s01_strong_leads", "s10_copy_of_s01_renamed"],
+    ["s02_strong_sentiment", "s13_copy_of_s02_verbatim"]
+  ],
+  "secret_samples": ["s11_committed_secret"]
+}
