@@ -100,6 +100,17 @@ def _split_words(text: str) -> int:
     return len(re.findall(r"[A-Za-z0-9']+", text))
 
 
+def _sections(text: str) -> list[tuple[str, int, bool]]:
+    """(heading, words in body, body has a fenced code block) for each heading."""
+    heads = list(re.finditer(r"^\s{0,3}#{1,6}\s+(.+?)\s*$", text, re.M))
+    out = []
+    for i, m in enumerate(heads):
+        end = heads[i + 1].start() if i + 1 < len(heads) else len(text)
+        body = text[m.end():end]
+        out.append((m.group(1), _split_words(body), "```" in body))
+    return out
+
+
 def _git_commits(root: Path) -> list[str] | None:
     """Commit subjects from git, or from a _commits.txt fixture, or None."""
     if (root / ".git").exists():
@@ -241,13 +252,21 @@ def analyze(root: str | Path, long_function_lines: int = 40) -> Signals:
                 sig.placeholders += 1
 
     sig.file_count = count
-    sig.junk_dirs = sorted(found_junk & COMMITTED_JUNK)
+    ignored = set()
+    gi = root / ".gitignore"
+    if gi.exists():
+        for line in gi.read_text(errors="ignore").splitlines():
+            ignored.add(line.strip().strip("/*"))
+    # A junk folder only counts against the submission if its own .gitignore does not exclude it.
+    sig.junk_dirs = sorted((found_junk & COMMITTED_JUNK) - ignored)
 
     if sig.readme_text:
         sig.readme_words = _split_words(sig.readme_text)
         sig.readme_headings = re.findall(r"^\s{0,3}#{1,6}\s+(.+?)\s*$", sig.readme_text, re.M)
         sig.readme_code_blocks = sig.readme_text.count("```") // 2
-        heading_blob = " ".join(sig.readme_headings).lower()
+        # A heading only counts as a section if something real sits under it.
+        real = [h for h, n, code in _sections(sig.readme_text) if n >= 4 or code]
+        heading_blob = " ".join(real).lower()
         for key, words in README_SECTIONS.items():
             if any(w in heading_blob for w in words):
                 sig.readme_sections.add(key)
