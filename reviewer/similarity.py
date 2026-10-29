@@ -70,9 +70,12 @@ def compare(target: dict, corpus: dict[str, dict], cfg: dict) -> list[dict]:
     struct_sim = _cosine(struct_docs, (4, 6))[0][1:]
     read_sim = [0.0] * len(names)
     if len(target["readme"].split()) >= 40:
-        docs = [target["readme"]] + [corpus[n]["readme"] for n in names]
-        if all(len(d.split()) >= 40 for d in docs):
-            read_sim = _cosine(docs, (3, 3))[0][1:]
+        # Short READMEs are left out of the comparison, not allowed to switch it off for everyone.
+        long = [i for i, n in enumerate(names) if len(corpus[n]["readme"].split()) >= 40]
+        if long:
+            docs = [target["readme"]] + [corpus[names[i]]["readme"] for i in long]
+            for i, sim in zip(long, _cosine(docs, (3, 3))[0][1:]):
+                read_sim[i] = sim
     for i, name in enumerate(names):
         r, st, rd = float(raw_sim[i]), float(struct_sim[i]), float(read_sim[i])
         hit_code = st >= cfg["struct"] or r >= cfg["raw_only"]

@@ -8,7 +8,7 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from reviewer import review_submission, load_rubric  # noqa: E402
+from reviewer import review_submission, load_rubric, similarity  # noqa: E402
 from reviewer.analyzer import analyze  # noqa: E402
 from reviewer.feedback import polish_with_llm  # noqa: E402
 from reviewer.fetch import FetchError, prepare  # noqa: E402
@@ -162,3 +162,17 @@ def test_gitignored_junk_folder_is_not_penalised(tmp_path):
 
 def test_missing_deliverables_alone_do_not_force_human_review(cohort):
     assert not cohort["s03_good_code_no_reports"]["needs_human_review"]
+
+
+def test_short_readme_in_corpus_does_not_switch_off_readme_overlap():
+    readme = " ".join(f"word{i}" for i in range(50))
+
+    def entry(prefix, text):
+        tokens = [f"{prefix}{i}" for i in range(80)]
+        return {"raw": tokens, "struct": tokens, "readme": text}
+
+    corpus = {"copy": entry("b", readme), "short": entry("c", "just five words here ok")}
+    matches = similarity.compare(entry("a", readme), corpus, RUBRIC["similarity"])
+    assert [m["other"] for m in matches] == ["copy"]
+    assert matches[0]["reason"] == "README wording overlap"
+
