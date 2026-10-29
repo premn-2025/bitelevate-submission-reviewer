@@ -1,0 +1,3 @@
+add gradient descent
+add mse and demo
+readme

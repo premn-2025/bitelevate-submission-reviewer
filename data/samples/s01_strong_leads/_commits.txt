@@ -1,0 +1,12 @@
+Set up project layout and requirements
+Add budget tier scoring
+Add keyword scoring with tests
+Add urgency scoring
+Combine signals into capped score
+Add band names and command line demo
+Write unit tests for every rule
+Label twenty example inquiries for checking
+Write README with setup and usage
+Add opportunity report
+Add technical approach and plan
+Fix case-insensitive keyword matching

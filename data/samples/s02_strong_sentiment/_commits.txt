@@ -1,0 +1,10 @@
+Initial layout
+Add tokenizer
+Add polarity scoring with negation
+Add label function
+Add summary counts
+Add run script for review files
+Add six unit tests
+Write README
+Write opportunity report
+Write technical approach and plan

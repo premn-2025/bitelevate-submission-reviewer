@@ -1,0 +1,4 @@
+add fetcher
+add watchlist function
+add readme
+add env file

@@ -1,0 +1,7 @@
+Start csv cleaner
+Add header normalisation
+Add number parsing
+Add dedupe and drop_empty
+Add summary report
+Add tests
+Add README

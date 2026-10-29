@@ -1,0 +1,5 @@
+first version
+add stopwords
+add tests
+update readme
+fix
