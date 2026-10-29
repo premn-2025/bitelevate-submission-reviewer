@@ -176,3 +176,12 @@ def test_short_readme_in_corpus_does_not_switch_off_readme_overlap():
     assert [m["other"] for m in matches] == ["copy"]
     assert matches[0]["reason"] == "README wording overlap"
 
+
+def test_tests_folder_is_matched_as_a_path_segment(tmp_path):
+    (tmp_path / "contests").mkdir()
+    (tmp_path / "contests" / "solver.py").write_text("def solve():\n    return 1\n")
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "tests" / "helpers.py").write_text("def test_solve():\n    assert True\n")
+    sig = analyze(tmp_path)
+    assert sig.test_files == 1
+    assert sig.py.functions == 1

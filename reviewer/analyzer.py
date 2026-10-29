@@ -234,7 +234,7 @@ def analyze(root: str | Path, long_function_lines: int = 40) -> Signals:
                     break
             if suffix in {".py", ".ipynb"}:
                 code = _notebook_code(text) if suffix == ".ipynb" else text
-                is_test = bool(re.match(r"test_.*\.py$|.*_test\.py$", fname)) or "tests/" in rel
+                is_test = bool(re.match(r"test_.*\.py$|.*_test\.py$", fname)) or "tests" in rel.split("/")[:-1]
                 if is_test:
                     sig.test_files += 1
                 _scan_python(rel, code, sig.py, long_function_lines, is_test, sig)
