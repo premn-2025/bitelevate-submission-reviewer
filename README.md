@@ -16,7 +16,7 @@ Built for the Cynbit Technologies AI/ML Engineer Intern assessment ("Identify an
 
 ```
 pip install -r requirements.txt
-python -m pytest -q                              # 19 tests
+python -m pytest -q                              # 21 tests
 python -m reviewer.cli data/samples --cohort     # review the sample cohort
 python -m reviewer.cli path/to/submission        # review one folder
 python -m reviewer.cli https://github.com/owner/repo --corpus data/samples
