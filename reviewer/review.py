@@ -54,9 +54,11 @@ def _routing(score: float, criteria, flags, sig: Signals, rubric: dict) -> tuple
         if threshold and abs(score - threshold) <= margin:
             reasons.append(f"Score {score} is within {margin} points of the {name} cutoff ({threshold})")
             break
-    live = [c.score for c in criteria if c.available]
-    if live and max(live) - min(live) >= rubric["conflict_gap"]:
-        reasons.append("Criteria disagree strongly (one area is excellent while another is nearly empty)")
+    # Only the quality signals can contradict each other. A zero on task fit or git
+    # history means something is missing, which the score already reflects.
+    quality = [c.score for c in criteria if c.key in ("documentation", "code_quality", "testing") and c.available]
+    if quality and max(quality) - min(quality) >= rubric["conflict_gap"]:
+        reasons.append("Docs, code and tests disagree strongly (one is excellent while another is nearly empty)")
     if sig.py.total_lines < 20 and sig.readme_words < 50:
         reasons.append("Very little content to evaluate; the upload may be incomplete")
     return bool(reasons), reasons
