@@ -15,7 +15,6 @@
   "similarity": {
     "min_tokens": 60,
     "struct": 0.80,
-    "raw": 0.50,
     "raw_only": 0.85,
     "readme": 0.80
   },

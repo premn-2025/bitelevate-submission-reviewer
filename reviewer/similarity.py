@@ -75,7 +75,7 @@ def compare(target: dict, corpus: dict[str, dict], cfg: dict) -> list[dict]:
             read_sim = _cosine(docs, (3, 3))[0][1:]
     for i, name in enumerate(names):
         r, st, rd = float(raw_sim[i]), float(struct_sim[i]), float(read_sim[i])
-        hit_code = (st >= cfg["struct"] and r >= cfg["raw"]) or r >= cfg["raw_only"]
+        hit_code = st >= cfg["struct"] or r >= cfg["raw_only"]
         hit_readme = rd >= cfg["readme"]
         if hit_code or hit_readme:
             matches.append({
@@ -83,6 +83,6 @@ def compare(target: dict, corpus: dict[str, dict], cfg: dict) -> list[dict]:
                 "raw": round(r, 2),
                 "struct": round(st, 2),
                 "readme": round(rd, 2),
-                "reason": "code structure and wording overlap" if hit_code else "README wording overlap",
+                "reason": "code overlaps once names are masked" if hit_code else "README wording overlap",
             })
     return sorted(matches, key=lambda m: -(m["struct"] + m["raw"] + m["readme"]))
