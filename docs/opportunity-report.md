@@ -1,6 +1,6 @@
 # AI Opportunity Report for Cynbit Technologies
 
-Prepared for the AI/ML Engineer Intern assessment. Facts about Cynbit come from its public pages (listed at the end), read on 29 October 2026. I could not see anything internal, so every estimate below is my own judgement and is marked as such.
+Prepared for the AI/ML Engineer Intern assessment. Facts about Cynbit come from its public pages (listed at the end), read on 29 and 30 October 2026. I could not see anything internal, so every estimate below is my own judgement and is marked as such.
 
 ## 1. What Cynbit is, from the outside
 
