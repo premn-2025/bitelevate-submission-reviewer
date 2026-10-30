@@ -29,7 +29,7 @@ Scores are 1 to 5, my own judgement, higher is better. "Data" means how much usa
 
 | # | Opportunity | Value | Data | Ease | Notes |
 |---|---|---|---|---|---|
-| 1 | First-pass review of BitElevate task submissions | 4 | 4 | 4 | Real bottleneck, rubric already implied by the tasks, measurable against reviewer grades |
+| 1 | First-pass review of BitElevate task submissions | 4 | 4 | 4 | Likely bottleneck (unverified); no published rubric; measurable against reviewer grades |
 | 2 | Inbound lead triage and scoring | 4 | 2 | 4 | Fits the CRM automation offer, but little labelled history; the easiest idea to reach for |
 | 3 | Voice AI qualifier for inbound calls | 4 | 2 | 2 | Matches a listed service, but speech quality in Indian languages and call recording consent add risk |
 | 4 | Proposal and scope drafter from discovery notes | 4 | 3 | 3 | High value per use, needs past proposals as examples |
