@@ -16,7 +16,7 @@ Built for the Cynbit Technologies AI/ML Engineer Intern assessment ("Identify an
 
 ```
 pip install -r requirements.txt
-python -m pytest -q                              # 21 tests
+python -m pytest -q                              # 22 tests
 python -m reviewer.cli data/samples --cohort     # review the sample cohort
 python -m reviewer.cli path/to/submission        # review one folder
 python -m reviewer.cli https://github.com/owner/repo --corpus data/samples
@@ -24,7 +24,7 @@ streamlit run app.py                             # review queue in the browser
 python evals/run_eval.py                         # compare against labels
 ```
 
-No API key is needed. If `ANTHROPIC_API_KEY` is set and the `anthropic` package is installed, `--llm` (or the button in the app) rewords the feedback; it sends only the structured findings, never the code.
+No API key is needed. With a key, `--llm` (or the button in the app) rewords the feedback; it sends only the structured findings, never the code. It uses Anthropic if `ANTHROPIC_API_KEY` is set and the `anthropic` package is installed. Otherwise it uses `LLM_API_KEY` (or `OPENAI_API_KEY`) with any OpenAI-compatible API, such as OpenAI, Gemini, Groq, OpenRouter or a local Ollama; set `LLM_BASE_URL` and `LLM_MODEL` for providers other than OpenAI.
 
 ## What it checks
 

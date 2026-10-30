@@ -61,9 +61,10 @@ The optional step (`feedback.polish_with_llm`) rewords the template feedback int
 
 - **Input.** Only the structured findings: band, score, strengths, improvements and flag text. No source code or README text is sent, and neither is the submission's own name. Overlap flags do name the other submission's folder, which could be a student's name.
 - **System prompt.** Use only the given findings, invent nothing, no scores of its own, at most 140 words, say once that this is a draft for the human reviewer.
+- **Provider.** Anthropic if `ANTHROPIC_API_KEY` is set; otherwise any OpenAI-compatible API through `LLM_API_KEY` (or `OPENAI_API_KEY`), `LLM_BASE_URL` and `LLM_MODEL`, called over plain HTTP with no extra package. The same findings-only payload goes to whichever provider is configured.
 - **Settings.** Low temperature (0.2), short output cap.
 - **Failure behaviour.** No API key, a missing package or any error returns `None`, and the template feedback is used.
-- **Testing.** A unit test passes a fake client and checks that a function definition from the sample is not in the payload and that the system prompt contains the "Do not invent" instruction. I have not run it against a live model in this build, so wording quality is untested.
+- **Testing.** Two unit tests, one with a fake Anthropic client and one with a faked OpenAI-compatible HTTP call, each check that a function definition from the sample is not in the payload and that the system prompt contains the "Do not invent" instruction. I have not run it against a live model in this build, so wording quality is untested.
 
 If the LLM step grew into judging, I would add a fixed output schema, a held-out set of human-graded examples, and a check that every claim in the output maps to a given finding.
 
