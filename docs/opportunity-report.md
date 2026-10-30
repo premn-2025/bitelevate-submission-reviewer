@@ -87,4 +87,5 @@ Cynbit's actual review process, cohort sizes, reviewer time, grading rubric and 
 - Cynbit Technologies on GitHub (organisation profile): https://github.com/Cynbit-Technologies/.github
 - Cynbit Technologies on Crunchbase: https://www.crunchbase.com/organization/cynbit-technologies
 - Cynbit website, home, story and contact pages: https://www.cynbit.in/ , https://www.cynbit.in/story , https://www.cynbit.in/contact
+- Cynbit website, BitElevate, products and services pages: https://www.cynbit.in/bitelevate , https://www.cynbit.in/products , https://www.cynbit.in/services
 - LinkedIn profile of a Cynbit team member, showing BitElevate 2.0 activity: https://www.linkedin.com/in/mohak-saini-588991167/
