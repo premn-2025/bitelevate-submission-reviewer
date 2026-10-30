@@ -66,7 +66,19 @@ For illustration only: 300 submissions x 20 minutes x 40% = 40 hours per cohort.
 - **Student data.** Submissions are personal work. The optional LLM step sends only the structured findings, not the code, and should stay off until Cynbit has decided its policy.
 - **Overlap flags are not accusations.** A shared starter template would create false matches. Flags are worded as "needs a human look".
 
-## 7. What I could not verify
+## 7. What I noticed on the website myself
+
+I read the BitElevate, Products and Services pages on 30 October 2026. Three things stood out.
+
+**BitElevate is a paid sprint, not an application.** The form asks for name, college, contact details, preferred lab and sprint length, then takes a one-time fee of ₹3,999 through Cashfree. Credentials are emailed after payment. I saw nothing about screening applicants, so automating admissions looks like the wrong target. The work that is left is what happens after someone enrols.
+
+**Human review is already part of the product, but I found no published grading criteria.** The page promises "line-by-line constructive feedback on every PR" from senior evaluators, and the 60-day roadmap covers bug fixing, tests, architecture, concurrency and a Docker capstone. It does not say how a submission is scored or what counts as passing. The only outcomes it describes are a PR being approved or sent back. So I am not claiming Cynbit has no review process. My point is narrower: a written rubric and a quick first pass could make reviews more consistent and save reviewers' time.
+
+**The AI claims are big, but there is nothing to try.** Cynbit Studio advertises AI-evaluated missions and feedback on code quality "instead of just simple output matching", and Revio advertises sentiment analysis. All three products offer only a demo-request form. I saw no accuracy figures or case studies on the Services or Products pages. Studio's code evaluation overlaps with my idea, so this tool is better seen as a rubric-and-checks layer that could sit alongside it than as a replacement.
+
+**A gap in my own build.** BitElevate students submit pull requests, but this tool scores whole repositories. A mode that reads a PR diff is the obvious next step.
+
+## 8. What I could not verify
 
 Cynbit's actual review process, cohort sizes, reviewer time, grading rubric and which Revio and TenantEase features exist today. The rubric in this project is my reading of the assessment itself and should be replaced by Cynbit's own.
 
