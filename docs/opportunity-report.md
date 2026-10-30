@@ -60,7 +60,7 @@ For illustration only: 300 submissions x 20 minutes x 40% = 40 hours per cohort.
 
 ## 6. Risks
 
-- **Fairness.** Code metrics only understand Python and notebooks today. A strong JavaScript submission would score unfairly low until other languages are added. This must be fixed before any real use.
+- **Fairness.** Code metrics only understand Python and notebooks today. BitElevate lists six labs, and going by their names only the Python Backend and AI & Vector Intelligence labs are likely to be Python. The others are Full Stack, Next.js, QA automation and UI/UX design. So today the tool would fit a minority of the labs, a strong JavaScript submission would score unfairly low, and the design lab needs a different kind of review altogether. I am inferring this from the lab names, not from the lab content. Other languages must be supported before any real use.
 - **Gaming.** Students who learn the rubric can write to it. Some defences exist (README sections must contain content) but they are partial.
 - **Over-trust.** A number looks authoritative. The design keeps the evidence visible and keeps the final grade with a person.
 - **Student data.** Submissions are personal work. The optional LLM step sends only the structured findings, not the code, and should stay off until Cynbit has decided its policy.
