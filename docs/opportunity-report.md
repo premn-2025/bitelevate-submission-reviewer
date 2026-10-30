@@ -33,8 +33,8 @@ Scores are 1 to 5, my own judgement, higher is better. "Data" means how much usa
 | 2 | Inbound lead triage and scoring | 4 | 2 | 4 | Fits the CRM automation offer, but little labelled history; the easiest idea to reach for |
 | 3 | Voice AI qualifier for inbound calls | 4 | 2 | 2 | Matches a listed service, but speech quality in Indian languages and call recording consent add risk |
 | 4 | Proposal and scope drafter from discovery notes | 4 | 3 | 3 | High value per use, needs past proposals as examples |
-| 5 | Review analytics and reply drafting for Revio | 3 | 3 | 3 | Product-side upgrade; I know little about Revio's current features |
-| 6 | Maintenance request triage for TenantEase | 3 | 2 | 3 | Clear task, but little public detail about the product |
+| 5 | Review analytics and reply drafting for Revio | 3 | 3 | 3 | Product-side upgrade; Cynbit's own claims only, no demo to inspect |
+| 6 | Maintenance request triage for TenantEase | 3 | 2 | 3 | Clear task, but Cynbit's own claims only, no demo to inspect |
 | 7 | Hardening Cynbit Studio's code evaluation | 4 | 3 | 2 | Needs sandboxed execution of untrusted code, which is a larger project |
 
 ## 4. Choice: first-pass review of BitElevate submissions
