@@ -4,6 +4,8 @@ A first-pass reviewer for BitElevate-style task submissions. It scores a reposit
 
 Built for the Cynbit Technologies AI/ML Engineer Intern assessment ("Identify an AI Opportunity for Cynbit").
 
+**Live demo:** https://bitelevate.streamlit.app/ (sample cohort, no sign-in needed; free tier, so it may take a few seconds to wake up)
+
 ## Deliverables
 
 | Deliverable | Where |
@@ -11,6 +13,7 @@ Built for the Cynbit Technologies AI/ML Engineer Intern assessment ("Identify an
 | AI Opportunity Report | [docs/opportunity-report.md](docs/opportunity-report.md) |
 | Proof of concept | this repository (`reviewer/`, `app.py`) |
 | Technical Approach Report | [docs/technical-approach.md](docs/technical-approach.md) |
+| Live demo | https://bitelevate.streamlit.app/ |
 
 ## Quick start
 
