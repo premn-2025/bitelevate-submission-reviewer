@@ -118,6 +118,7 @@ If the LLM step grew into judging, I would add a fixed output schema, a held-out
 - When a submission has no `.git` folder, a `_commits.txt` file is trusted as its history, so a student could fake one.
 - `git log` runs on a `.git` folder that came from the student's zip. It does not run their code, but it is git working on an untrusted repository.
 - Overlap flags include the other submission's folder name, which reaches the reviewer and, if the LLM step is on, the LLM.
+- Reviews whole submissions, while BitElevate's workflow is pull-request based. A mode that reads a PR diff is a next step.
 
 ## 9. Execution plan
 
