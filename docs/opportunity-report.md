@@ -8,7 +8,7 @@ Cynbit Technologies Private Limited is a small software company in Jaipur, Rajas
 
 **Services.** AI agents and workflow automation, LLM integrations, voice AI, CRM automation, web and mobile development, backend and cloud work (AWS, Azure), legacy migration, technical SEO and funnel optimisation.
 
-**Its own products.** Cynbit Studio (coding practice, AI code evaluation, career preparation, mock interviews, AI mentorship), plus TenantEase and Revio. Public descriptions of the last two are thin: from the names, TenantEase looks like property management and Revio like review management, but I could not confirm either from Cynbit's own pages.
+**Its own products.** Cynbit Studio (coding practice, AI code evaluation, career preparation, mock interviews, AI mentorship), plus TenantEase and Revio. TenantEase and Revio are described on the Products page as property and tenant management (rent tracking, reminders) and an AI reputation tool (sentiment analysis, crisis detection, AI-written replies). These are Cynbit's own claims; I could not see a working demo of either.
 
 **BitElevate.** A training and industry-readiness programme built around projects, technical tasks, mentorship and assessments, covering full-stack development, AI, data science, cloud, cybersecurity and digital marketing. BitElevate 2.0 started its first cohort with the Department of Lifelong Learning at the University of Rajasthan and a local trust.
 
