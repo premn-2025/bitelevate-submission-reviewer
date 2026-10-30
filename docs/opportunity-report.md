@@ -68,7 +68,7 @@ For illustration only: 300 submissions x 20 minutes x 40% = 40 hours per cohort.
 
 ## 7. What I noticed on the website myself
 
-I read the BitElevate, Products and Services pages on 30 October 2026. Three things stood out.
+I read the BitElevate, Products and Services pages on 30 October 2026. Four things stood out.
 
 **BitElevate is a paid sprint, not an application.** The form asks for name, college, contact details, preferred lab and sprint length, then takes a one-time fee of ₹3,999 through Cashfree. Credentials are emailed after payment. I saw nothing about screening applicants, so automating admissions looks like the wrong target. The work that is left is what happens after someone enrols.
 
