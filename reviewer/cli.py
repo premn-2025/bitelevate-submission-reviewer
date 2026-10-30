@@ -49,7 +49,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--corpus", help="folder of other submissions to compare against for overlap")
     ap.add_argument("--rubric", help="path to a rubric JSON (default: data/rubric.json)")
     ap.add_argument("--cohort", action="store_true", help="review every subfolder of SOURCE")
-    ap.add_argument("--llm", action="store_true", help="also draft friendlier feedback (needs ANTHROPIC_API_KEY)")
+    ap.add_argument("--llm", action="store_true", help="also draft friendlier feedback (needs ANTHROPIC_API_KEY or LLM_API_KEY)")
     ap.add_argument("--json", dest="json_out", help="write full results to this JSON file")
     args = ap.parse_args(argv)
 

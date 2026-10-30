@@ -1,3 +1,4 @@
+import io
 import json
 import sys
 import zipfile
@@ -148,8 +149,36 @@ def test_llm_polish_sends_findings_not_code(cohort):
 
 
 def test_llm_polish_returns_none_without_key(cohort, monkeypatch):
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    for var in ("ANTHROPIC_API_KEY", "LLM_API_KEY", "OPENAI_API_KEY"):
+        monkeypatch.delenv(var, raising=False)
     assert polish_with_llm(cohort["s01_strong_leads"]) is None
+
+
+def test_llm_polish_works_with_any_openai_compatible_key(cohort, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setenv("LLM_API_KEY", "test-key")
+    monkeypatch.setenv("LLM_BASE_URL", "https://llm.example/v1/")
+    monkeypatch.setenv("LLM_MODEL", "some-model")
+    seen = {}
+
+    class Resp(io.BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    def fake_urlopen(req, timeout):
+        seen["url"], seen["auth"], seen["body"] = req.full_url, req.get_header("Authorization"), json.loads(req.data)
+        return Resp(json.dumps({"choices": [{"message": {"content": "Friendly draft."}}]}).encode())
+
+    monkeypatch.setattr("reviewer.feedback.urllib.request.urlopen", fake_urlopen)
+    assert polish_with_llm(cohort["s01_strong_leads"]) == "Friendly draft."
+    assert seen["url"] == "https://llm.example/v1/chat/completions"
+    assert seen["auth"] == "Bearer test-key"
+    assert seen["body"]["model"] == "some-model"
+    assert "Do not invent" in seen["body"]["messages"][0]["content"]
+    assert "def score_lead" not in seen["body"]["messages"][1]["content"]
 
 
 def test_gitignored_junk_folder_is_not_penalised(tmp_path):

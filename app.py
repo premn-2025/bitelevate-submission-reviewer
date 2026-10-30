@@ -72,7 +72,7 @@ def show_result(r: dict, key: str) -> None:
         st.write("**To improve**")
         for s in fb["improvements"] or ["No major gaps found."]:
             st.write(f"- {s}")
-    if st.button("Reword with an LLM (needs ANTHROPIC_API_KEY)", key=f"llm_{key}"):
+    if st.button("Reword with an LLM (needs an API key)", key=f"llm_{key}"):
         text = polish_with_llm(r)
         st.write(text if text else "No API key set, or the call failed. The template feedback above still stands.")
 

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+import urllib.request
 
 SYSTEM_PROMPT = (
     "You write short feedback for students on a technical task submission. "
@@ -48,17 +49,46 @@ def build_feedback(result: dict) -> dict:
     return {"summary": summary, "strengths": strengths[:4], "improvements": improvements[:6]}
 
 
-def polish_with_llm(result: dict, client=None, model: str | None = None) -> str | None:
-    """Return a reworded paragraph, or None if no API key / any failure."""
+def _ask_anthropic(content: str, client, model: str | None) -> str | None:
     if client is None:
-        key = os.environ.get("ANTHROPIC_API_KEY")
-        if not key:
-            return None
-        try:
-            import anthropic  # optional dependency
-            client = anthropic.Anthropic(api_key=key)
-        except Exception:
-            return None
+        import anthropic  # optional dependency
+        client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    resp = client.messages.create(
+        model=model or os.environ.get("CYNBIT_LLM_MODEL", "claude-sonnet-5-5"),
+        max_tokens=400,
+        temperature=0.2,
+        system=SYSTEM_PROMPT,
+        messages=[{"role": "user", "content": content}],
+    )
+    return "".join(b.text for b in resp.content if getattr(b, "type", "") == "text").strip() or None
+
+
+def _ask_openai_compatible(content: str, key: str, model: str | None) -> str | None:
+    """Any provider with an OpenAI-style /chat/completions endpoint. Plain HTTP, no package needed."""
+    base = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+    body = {
+        "model": model or os.environ.get("LLM_MODEL", "gpt-4o-mini"),
+        "max_tokens": 400,
+        "temperature": 0.2,
+        "messages": [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}],
+    }
+    req = urllib.request.Request(
+        f"{base}/chat/completions",
+        data=json.dumps(body).encode(),
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        reply = json.load(resp)
+    return (reply["choices"][0]["message"]["content"] or "").strip() or None
+
+
+def polish_with_llm(result: dict, client=None, model: str | None = None) -> str | None:
+    """Return a reworded paragraph, or None if no API key / any failure.
+
+    Uses Anthropic if ANTHROPIC_API_KEY is set (or a client is passed). Otherwise
+    LLM_API_KEY (or OPENAI_API_KEY) with any OpenAI-compatible API; set LLM_BASE_URL
+    and LLM_MODEL for providers other than OpenAI.
+    """
     payload = {
         "band": result["band"],
         "score": result["score"],
@@ -66,14 +96,13 @@ def polish_with_llm(result: dict, client=None, model: str | None = None) -> str 
         "improvements": result["feedback"]["improvements"],
         "flags": [f["detail"] for f in result["flags"]],
     }
+    content = json.dumps(payload, indent=2)
     try:
-        resp = client.messages.create(
-            model=model or os.environ.get("CYNBIT_LLM_MODEL", "claude-sonnet-5-5"),
-            max_tokens=400,
-            temperature=0.2,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": json.dumps(payload, indent=2)}],
-        )
-        return "".join(b.text for b in resp.content if getattr(b, "type", "") == "text").strip() or None
+        if client is not None or os.environ.get("ANTHROPIC_API_KEY"):
+            return _ask_anthropic(content, client, model)
+        key = os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY")
+        if key:
+            return _ask_openai_compatible(content, key, model)
     except Exception:
         return None
+    return None
